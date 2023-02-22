@@ -2,11 +2,6 @@ import java.util.Scanner;
 
 public class SetEngWord extends Word{
 
-    public SetEngWord() {
-        setEngWord();
-        setRusWord();
-    }
-
     public void setEngWord() {
         System.out.println("Введите слово на английском языке, которое нужно запомнить");
         Scanner iScanner = new Scanner(System.in);
