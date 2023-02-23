@@ -15,16 +15,17 @@ public class UserMenu {
         System.out.println("¬веди 3, если ты хочешь выйти из приложени€: ");
         Scanner userNumber = new Scanner(System.in);
         this.userChoice = userNumber.nextInt();
-        SetEngWord newWord = new SetEngWord();
+        SetNewWord newWord = new SetNewWord();
         switch (userChoice) {
             case 1 -> {
                 newWord.setEngWord();
                 newWord.setRusWord();
+                WorkWithFile.writeToFile(newWord);
             }
             case 2 -> {
-                System.out.printf("Say me %s\n", newWord.getEnglish());
+                System.out.printf("Say me %s\n", WorkWithFile.readFromFile());//.split(" ")[0]);
                 Scanner iScanner = new Scanner(System.in);
-                if(Objects.equals(iScanner.nextLine(), newWord.getRussian())) {
+                if(Objects.equals(iScanner.nextLine(), WorkWithFile.readFromFile())) {//.split(" ")[2])) {
                     System.out.println("Yes, you are right");
                 } else {
                     System.out.println("Nope, it is not correct");
