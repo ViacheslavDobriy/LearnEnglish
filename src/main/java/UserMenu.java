@@ -21,15 +21,16 @@ public class UserMenu {
                 newWord.setEngWord();
                 newWord.setRusWord();
                 WorkWithFile.writeToFile(newWord);
+                newWord.putItInMap();
             }
             case 2 -> {
-                System.out.printf("Say me %s\n", WorkWithFile.readFromFile());//.split(" ")[0]);
-                Scanner iScanner = new Scanner(System.in);
-                if(Objects.equals(iScanner.nextLine(), WorkWithFile.readFromFile())) {//.split(" ")[2])) {
-                    System.out.println("Yes, you are right");
-                } else {
-                    System.out.println("Nope, it is not correct");
-                    System.out.println(newWord.getRussian());
+                for (var word : DatabaseOfWords.getDatabase().entrySet()) {
+                    System.out.printf("How to say %s on russian?", word.getKey());
+                    Scanner iScanner = new Scanner(System.in);
+                    String answer = iScanner.nextLine();
+                    if(Objects.equals(word.getValue(), answer)){
+                        System.out.println("Правильно, молодец!");
+                    } else System.out.printf("Неправильно! А правильно будет %s", word.getValue());
                 }
             }
         }
