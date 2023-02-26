@@ -13,6 +13,7 @@ public class UserMenu {
         System.out.println("Введи 1, если ты собираешься добавить новое слово: ");
         System.out.println("Введи 2, если ты собираешься повторить свои слова: ");
         System.out.println("Введи 3, если ты хочешь выйти из приложения: ");
+        WorkWithFile.readFromFile();
         Scanner userNumber = new Scanner(System.in);
         this.userChoice = userNumber.nextInt();
         SetNewWord newWord = new SetNewWord();
@@ -25,12 +26,14 @@ public class UserMenu {
             }
             case 2 -> {
                 for (var word : DatabaseOfWords.getDatabase().entrySet()) {
-                    System.out.printf("How to say %s on russian?", word.getKey());
+                    System.out.printf("Как переводится %s на русский? ", word.getKey());
                     Scanner iScanner = new Scanner(System.in);
                     String answer = iScanner.nextLine();
-                    if(Objects.equals(word.getValue(), answer)){
-                        System.out.println("Правильно, молодец!");
-                    } else System.out.printf("Неправильно! А правильно будет %s", word.getValue());
+                    if(answer == word.getValue()){
+                        System.out.println("Правильно!");
+                    } else {
+                        System.out.println(word.getValue());
+                    }
                 }
             }
         }
