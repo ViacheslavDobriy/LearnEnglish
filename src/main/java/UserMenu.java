@@ -1,4 +1,4 @@
-import java.util.Objects;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class UserMenu {
@@ -29,10 +29,10 @@ public class UserMenu {
                     System.out.printf("Как переводится %s на русский? ", word.getKey());
                     Scanner iScanner = new Scanner(System.in);
                     String answer = iScanner.nextLine();
-                    if(answer == word.getValue()){
+                    if(compareBytes(answer.getBytes(StandardCharsets.UTF_8), word.getValue().getBytes(StandardCharsets.UTF_8))){
                         System.out.println("Правильно!");
                     } else {
-                        System.out.println(word.getValue());
+                        System.out.println("Неправильно!");
                     }
                 }
             }
@@ -41,5 +41,15 @@ public class UserMenu {
 
     public int getUserChoice() {
         return userChoice;
+    }
+    private boolean compareBytes(byte[] myAnswer, byte[] fromFile) {
+        if(myAnswer.length == fromFile.length - 1) {
+            for (int i = 0; i < fromFile.length - 1; i++) {
+                if (myAnswer[i] != fromFile[i]) {
+                    return false;
+                }
+            }
+        } else return false;
+        return true;
     }
 }

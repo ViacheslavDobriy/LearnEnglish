@@ -5,16 +5,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Collections;
-import java.util.Objects;
-import java.util.Scanner;
 
 public class WorkWithFile {
     private static Path file = Paths.get("myDictionary.txt");
     public static void writeToFile(SetNewWord setNewWord){
         try {
             Files.write(file, Collections.singleton(setNewWord.getEnglish() + " " + setNewWord.getRussian()), StandardCharsets.UTF_8, StandardOpenOption.APPEND);
+            System.out.println(file.getRoot());
         } catch (IOException e){
             e.getMessage();
+            System.out.println("Файл не найден");
         }
     }
 
@@ -28,9 +28,6 @@ public class WorkWithFile {
             }
         } catch (IOException e) {
             e.getMessage();
-        }
-        for (var word : DatabaseOfWords.getDatabase().entrySet()) {
-            System.out.printf("%s - %s\n", word.getKey(), word.getValue());
         }
     }
 
