@@ -25,16 +25,7 @@ public class UserMenu {
                 newWord.putItInMap();
             }
             case 2 -> {
-                for (var word : DatabaseOfWords.getDatabase().entrySet()) {
-                    System.out.printf("Как переводится %s на русский? ", word.getKey());
-                    Scanner iScanner = new Scanner(System.in);
-                    String answer = iScanner.nextLine();
-                    if(compareBytes(answer.getBytes(StandardCharsets.UTF_8), word.getValue().getBytes(StandardCharsets.UTF_8))){
-                        System.out.println("Правильно!");
-                    } else {
-                        System.out.println("Неправильно!");
-                    }
-                }
+                System.out.println("Ты помнишь " + countsRightAnswers() + " слова из " + DatabaseOfWords.getDatabase().size());
             }
         }
     }
@@ -51,5 +42,21 @@ public class UserMenu {
             }
         } else return false;
         return true;
+    }
+
+    private int countsRightAnswers(){
+        int counter = 0;
+        for (var word : DatabaseOfWords.getDatabase().entrySet()) {
+            System.out.printf("Как переводится %s на русский? ", word.getKey());
+            Scanner iScanner = new Scanner(System.in);
+            String answer = iScanner.nextLine();
+            if(compareBytes(answer.getBytes(StandardCharsets.UTF_8), word.getValue().getBytes(StandardCharsets.UTF_8))){
+                System.out.println("Правильно!");
+                counter++;
+            } else {
+                System.out.println("Неправильно!");
+            }
+        }
+        return counter;
     }
 }

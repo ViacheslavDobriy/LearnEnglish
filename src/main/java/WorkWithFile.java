@@ -11,7 +11,6 @@ public class WorkWithFile {
     public static void writeToFile(SetNewWord setNewWord){
         try {
             Files.write(file, Collections.singleton(setNewWord.getEnglish() + " " + setNewWord.getRussian()), StandardCharsets.UTF_8, StandardOpenOption.APPEND);
-            System.out.println(file.getRoot());
         } catch (IOException e){
             e.getMessage();
             System.out.println("Файл не найден");
